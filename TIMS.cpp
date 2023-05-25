@@ -1,13 +1,16 @@
-//projekti - programim
-//Program qe ka db informacione te qytetareve
-/*Funksionet qe duhet te kete programi
-0. Regjistro nje qytetar te ri. 
-Informacione qe nevojiten: emri, mbiemri, ID, adresa, numri i telefonit,email
-1. Modifiko te dhenat e nje qytetari.(Duhet te perdor nje funksion per gjetjen e te dhenave te qytetarit si fillim)
-2. Fshi te dhenat e nje qytetari
-3. Kerko sipas a)emrit b)mbiemrit(te dalin te gjithe personat qe kane kete mbiemer) c)ID d) nr. telefonit
-4. Printo ne ekran te gjithe te dhenat e qytetareve: a) sipas regjistrimit b) alfabetikisht sipas emrit c) alfabetikisht sipas mbiemrit
-5. Dil nga programi
+/*project - programming
+//Program that has a database of citizen information
+/*Functions that the program should have
+
+1)Register a new citizen.
+Required information: name, surname, ID, address, phone number, email
+2)Modify the data of a citizen. (Use a function to find the data of the citizen first)
+3)Delete the data of a citizen
+4)Search by a) name b) surname (display all persons with this surname) c) ID d) phone number
+5)Print on screen all the data of the citizens: a) by registration order 
+6) alphabetically by name 
+7) alphabetically by surname
+0)Exit the program
 */
 
 //Main headers 
