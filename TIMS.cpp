@@ -49,21 +49,14 @@ struct Qytetar{
 	char numer[12];
 	char adresa[50];
 	char email[50];
-}db[MAX];
-
-struct Qytetaret2{
-	char emri[50];
-	char mbiemri[50];
-	char id[10];
-	char numer[12];
-	char adresa[50];
-	char email[50];
-}db2[MAX];
+};
+struct Qytetar db[MAX];
+struct Qytetar db2[MAX];
 
 int main() {
 	welcome_screen();
 	load_info();
-	//sleep(3);
+	sleep(3);
 	menu();
 	return 0;
 }
@@ -80,6 +73,9 @@ void welcome_screen()
 
 void load_info(){
 	fptr = fopen("db.txt", "r");
+	if (fptr == NULL) {
+        fptr = fopen("db.txt", "w");
+    }
 	fscanf(fptr, "%d", &struktura);
 	for(int i = 0; i < struktura;i++){
 		fscanf(fptr, "%s ", &db[i].emri);
@@ -94,6 +90,10 @@ void load_info(){
 
 void export_info() {
 	fptr = fopen("db.txt", "w");
+	if (fptr == NULL) {
+        printf("File nuk mund te hapet.\n");
+        return;
+    }
 	fprintf(fptr, "%d\n", struktura);
 	for(int i = 0; i < struktura; i++){
 		fprintf(fptr, "%s %s %s %s %s %s\n", db[i].emri, db[i].mbiemri, db[i].id, db[i].numer, db[i].adresa, db[i].email);
@@ -104,9 +104,9 @@ void export_info() {
 void menu()
 {
 	system("cls");
-	printf("Opsionet:\n");
-	printf("1-Shto nje te dhene\n2-Modifiko nje te dhene\n3-Fshi nje te dhene\n4-Kerko qyetetarin\n5-Printo database-in\n6-Radhit databazen sipas emrit\n7-Radhit databazen sipas mbiemrit\n0.Dil");
 	while (true){
+		printf("Opsionet:\n");
+		printf("1-Shto nje te dhene\n2-Modifiko nje te dhene\n3-Fshi nje te dhene\n4-Kerko qyetetarin\n5-Printo database-in\n6-Radhit databazen sipas emrit\n7-Radhit databazen sipas mbiemrit\n0.Dil");
 		int opsioni;
 		printf("\n\n|~|:");
 		scanf("%d", &opsioni);
@@ -122,7 +122,7 @@ void menu()
 				kthim();
 			case 4:
 				find();
-				menu();
+				kthim();
 			case 5:
 				printall();
 				kthim();
@@ -133,24 +133,14 @@ void menu()
 				radhit_mbiemri();
 				kthim();
 			case 0:
-				return;
+				kthim();
 			default:
 				printf("\nOpsion i gabuar");
-				kthim();
+				break;
 		}
 	}
 }
 
-void kthim() {
-	printf("Do te zgjedhesh opsion tjeter?\n1 - po\n2 - jo\n\n|~|:");
-	int opsion;
-	scanf("%d", &opsion);
-	if(opsion == 1){
-		menu();
-	} else {
-		exit(0);
-	}
-}
 void shto() {
 	    if (struktura < MAX) {
         printf("\nEmri:");
@@ -177,7 +167,6 @@ void modifiko(){
 	int vendi = id_print();
 	if (vendi == -1) {
         printf("\nQytetari nuk u gjet. Provoni perseri.");
-        kthim();
     }
 	printf("\nModifiko:\n1.Emri\n2.Mbiemri\n3.ID\n4.Numri\n5.Adresa\n6.Email\n\n|~|:");
 	int opsioni;
@@ -218,7 +207,6 @@ void fshi() {
 	int vendi = id_print();
 	if (vendi == -1) {
         printf("\nQytetari nuk u gjet. Provoni perseri.");
-        kthim();
     }
 	for(int i = vendi; i < struktura; i++){
 		strcpy(db[i].id, db[i+1].id);
@@ -253,19 +241,18 @@ void find()
 	switch(opsioni){
 		case 1:
 			find_emri();
-			kthim();
+			break;
 		case 2:
 			find_mbiemri();
-			kthim();
+			break;
 		case 3:
 			find_id();
-			kthim();
+			break;
 		case 4:
 			find_nr();
-			kthim();
+			break;
 		default:
 			printf("\nOpsion i gabuar\n");
-			kthim();
 			break;
 		}
 }
@@ -312,7 +299,6 @@ void find_id(){
 	int vendi = id_print();
 	if (vendi == -1) {
         printf("\nQytetari nuk u gjet. Provoni perseri.");
-        kthim();
     }
 	printf("Emri: %s\n", db[vendi].emri);
 	printf("Mbiemri: %s\n", db[vendi].mbiemri);
