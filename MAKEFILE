@@ -1,0 +1,5 @@
+all:
+      g++ -std=c++17 TIMS.cpp -o hello
+
+clean:
+      $(RM) tims
